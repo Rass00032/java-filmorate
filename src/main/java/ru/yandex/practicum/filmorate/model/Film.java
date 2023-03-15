@@ -18,11 +18,14 @@ public class Film {
     @NotBlank
     private String name;
 
-    @Max(200)
+
+    @Pattern(regexp = "^.{0,200}+$", message = "Описание должно быть не более 200 знаков!")
     private String description;
 
     private LocalDate releaseDate;
 
 
-    private Duration duration;
+    private Long duration;
+
+
 }

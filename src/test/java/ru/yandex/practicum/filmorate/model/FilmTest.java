@@ -23,7 +23,7 @@ class FilmTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         factory.getConstraintValidatorFactory();
         validator = factory.getValidator();
-        film = new Film(1,"name","description",LocalDate.of(2000,10,11), Duration.ofMinutes(120));
+        film = new Film(1,"name","description",LocalDate.of(2000,10,11), 120L);
     }
 
     @Test

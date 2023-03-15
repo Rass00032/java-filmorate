@@ -43,7 +43,7 @@ class UserControllerTest {
         controller.register(user);
         User user2 = new User(1, "java@yandex.ru", "login2", "name", LocalDate.of(1995, 8, 16));
         controller.updateUser(user2);
-        String login = controller.getAllUsers().get(1).getLogin();
+        String login = controller.getAllUsers().get(0).getLogin();
 
         assertEquals(login, user2.getLogin());
         Set<ConstraintViolation<User>> violations = validator.validate(user);

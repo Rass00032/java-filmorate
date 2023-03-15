@@ -6,12 +6,14 @@ import ru.yandex.practicum.filmorate.model.Film;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/film")
+@RequestMapping("/films")
 public class FilmController {
     private Map<Integer, Film> films = new HashMap<>();
 
@@ -20,7 +22,7 @@ public class FilmController {
     private int id = 1;
 
     @PostMapping
-    public Film addFilm(@RequestBody @Valid Film film) throws ValidationException{    //добавление фильма
+    public Film addFilm(@RequestBody @Valid Film film) throws ValidationException {    //добавление фильма
 
 
         if (film.getReleaseDate().isBefore(RELEASE_DATA)) {
@@ -28,7 +30,7 @@ public class FilmController {
             throw new ValidationException("Дата релиза — не раньше 28 декабря 1895 года!");
         }
 
-        if (film.getDuration().isNegative()) {
+        if (film.getDuration() <= 0) {
             log.error("Неверная продолжительность фильма {}", film.getDuration());
             throw new ValidationException("Продолжительность фильма должна быть положительной!");
         }
@@ -40,7 +42,7 @@ public class FilmController {
         return film;
     }
 
-    @PatchMapping
+    @PutMapping
     public Film updateFilm(@RequestBody @Valid Film film) throws ValidationException {     //обновление фильма
         if (!films.containsKey(film.getId())) throw new ValidationException("Фильм с таким id не найден!");
 
@@ -49,7 +51,7 @@ public class FilmController {
             throw new ValidationException("Дата релиза — не раньше 28 декабря 1895 года!");
         }
 
-        if (film.getDuration().isNegative()||film.getDuration().isZero()) {
+        if (film.getDuration() <= 0) {
             log.error("Неверная продолжительность фильма {}", film.getDuration());
             throw new ValidationException("Продолжительность фильма должна быть положительной!");
         }
@@ -61,9 +63,9 @@ public class FilmController {
     }
 
     @GetMapping
-    public Map<Integer, Film> getAllUsers() {    //получение всех фильмов
+    public List<Film> getAllUsers() throws ValidationException {    //получение всех фильмов
         log.info("Получениие списка всех фильмов");
-        return films;
+        return new ArrayList<Film>(films.values());
     }
 
 
