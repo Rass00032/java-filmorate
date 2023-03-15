@@ -17,7 +17,7 @@ class FilmControllerTest {
     @BeforeEach
     public void setUp() {
         controller = new FilmController();
-        film = new Film(1,"name","description", LocalDate.of(2000,10,11), 120L);
+        film = new Film(1,"name","description", LocalDate.of(2000,11,11), 120L);
     }
     @Test
     void addFilm() {
