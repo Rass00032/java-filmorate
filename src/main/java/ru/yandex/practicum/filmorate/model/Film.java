@@ -19,7 +19,7 @@ public class Film {
     private String name;
 
 
-    @Pattern(regexp = "^.{0,200}+$", message = "Описание должно быть не более 200 знаков!")
+    @Pattern(regexp = "^[\\s\\S]{0,200}$", message = "Описание должно быть не более 200 знаков!")
     private String description;
 
     private LocalDate releaseDate;
