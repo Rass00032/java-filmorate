@@ -24,7 +24,6 @@ public class UserController {
     public User register(@RequestBody @Valid User user) {    //создание пользователя
         user.setId(id++);
         if (user.getName() == null || user.getName().isBlank()) user.setName(user.getLogin());    // если имя пустое используется логин
-
         users.put(user.getId(), user);
         log.info("Регистрация полльзователя {}",user.getId());
         return user;
