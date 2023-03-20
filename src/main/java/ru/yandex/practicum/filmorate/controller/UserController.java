@@ -21,17 +21,16 @@ public class UserController {
     private int id = 1;
 
     @PostMapping
-    public User register(@RequestBody @Valid User user) {    //создание пользователя
+    public User register(@RequestBody @Valid User user) {
         user.setId(id++);
         if (user.getName() == null || user.getName().isBlank()) user.setName(user.getLogin());    // если имя пустое используется логин
         users.put(user.getId(), user);
         log.info("Регистрация полльзователя {}",user.getId());
         return user;
-
     }
 
     @PutMapping
-    public User updateUser(@RequestBody @Valid User user) throws ValidationException {     //обновление пользователя
+    public User updateUser(@RequestBody @Valid User user) throws ValidationException {
         if (!users.containsKey(user.getId())) {
             log.error("Пользователь с таким {} не найден!",user.getId());
             throw new ValidationException("Пользователь с таким id не найден!");
@@ -45,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {    //получение списка всех пользователей
+    public List<User> getAllUsers() {
         log.info("Получение списка всех пользователей");
         return new ArrayList<User>( users.values());
     }

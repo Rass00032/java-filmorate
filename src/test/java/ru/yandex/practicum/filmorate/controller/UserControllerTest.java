@@ -34,8 +34,6 @@ class UserControllerTest {
 
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertTrue(violations.isEmpty());
-
-
     }
 
     @Test

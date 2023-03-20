@@ -22,8 +22,7 @@ public class FilmController {
     private int id = 1;
 
     @PostMapping
-    public Film addFilm(@RequestBody @Valid Film film) throws ValidationException {    //добавление фильма
-
+    public Film addFilm(@RequestBody @Valid Film film) throws ValidationException {
 
         if (film.getReleaseDate().isBefore(RELEASE_DATA)) {
             log.error("Неверный формат даты {}", film.getReleaseDate());
@@ -43,7 +42,7 @@ public class FilmController {
     }
 
     @PutMapping
-    public Film updateFilm(@RequestBody @Valid Film film) throws ValidationException {     //обновление фильма
+    public Film updateFilm(@RequestBody @Valid Film film) throws ValidationException {
         if (!films.containsKey(film.getId())) throw new ValidationException("Фильм с таким id не найден!");
 
         if (film.getReleaseDate().isBefore(RELEASE_DATA)) {
@@ -63,7 +62,7 @@ public class FilmController {
     }
 
     @GetMapping
-    public List<Film> getAllUsers() throws ValidationException {    //получение всех фильмов
+    public List<Film> getAllUsers() throws ValidationException {
         log.info("Получениие списка всех фильмов");
         return new ArrayList<Film>(films.values());
     }
