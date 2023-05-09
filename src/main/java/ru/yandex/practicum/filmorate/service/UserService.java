@@ -19,7 +19,7 @@ public class UserService {
         storage = inMemoryUserStorage;
     }
 
-    public List<User> addFriend(int userId, int friendsId){
+    public List<User> addFriend(int userId, int friendsId) {
         if (!storage.contains(userId))
             throw new ObjectNotFound("Пользователь с id = " + userId + " не найден.");
 
@@ -32,7 +32,7 @@ public class UserService {
         return getAllFriends(userId);
     }
 
-    public List<User> removeFriend(int userId, int friendsId){
+    public List<User> removeFriend(int userId, int friendsId) {
         if (!storage.contains(userId))
             throw new ObjectNotFound("Пользователь с id = " + userId + " не найден.");
 
@@ -45,21 +45,21 @@ public class UserService {
         return getAllFriends(userId);
     }
 
-    public List<User> getAllFriends(int id){
+    public List<User> getAllFriends(int id) {
         Object[] friends = storage.getUser(id).getFriends().toArray();
         List<User> users = new ArrayList<>();
         for (Object friendsId : friends) {
-            users.add(storage.getUser((int)friendsId));
+            users.add(storage.getUser((int) friendsId));
         }
         return users;
     }
 
-    public List<User> mutualFriends(int userId, int anotherUserId){
+    public List<User> mutualFriends(int userId, int anotherUserId) {
         List<User> friendsUser = getAllFriends(userId);
         Set<Integer> friendsAnotherUser = storage.getUser(anotherUserId).getFriends();
         List<User> mutualFriends = new ArrayList<>();
 
-        if(friendsUser.size() == 0) return mutualFriends;
+        if (friendsUser.size() == 0) return mutualFriends;
 
         for (User user : friendsUser) {
             if (friendsAnotherUser.contains(user.getId())) {

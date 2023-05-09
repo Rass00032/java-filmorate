@@ -27,7 +27,7 @@ class FilmControllerTest {
     public void setUp() {
         storage = new InMemoryFilmStorage();
         service = new FilmService(storage, userStorage);
-        controller= new FilmController(storage,service);
+        controller = new FilmController(storage, service);
         film = new Film(1, "name", "description", LocalDate.of(2000, 10, 11), 120L);
     }
 
