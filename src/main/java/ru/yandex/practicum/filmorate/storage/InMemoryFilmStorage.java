@@ -19,7 +19,7 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     private Map<Integer, Film> films;
 
-    private final static LocalDate RELEASE_DATA = LocalDate.of(1895, 12, 28);
+    private static final LocalDate RELEASE_DATA = LocalDate.of(1895, 12, 28);
 
     private int id;
 
