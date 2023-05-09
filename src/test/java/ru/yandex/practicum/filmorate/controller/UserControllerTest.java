@@ -66,7 +66,6 @@ class UserControllerTest {
         assertTrue(violations.isEmpty());
     }
 
-
     @Test
     void addFriendAndRemove() throws ru.yandex.practicum.filmorate.exception.ValidationException {
         user = controller.register(user);
@@ -103,5 +102,4 @@ class UserControllerTest {
 
         assertEquals(answer, controller.findCommonFriends(user.getId(), user2.getId()));
     }
-
 }

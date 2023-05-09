@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootApplication
 class FilmControllerTest {
-
     private FilmController controller;
     private InMemoryFilmStorage storage;
     private InMemoryUserStorage userStorage;
@@ -52,5 +51,4 @@ class FilmControllerTest {
         });
         assertEquals("Продолжительность фильма должна быть положительной!", exception.getMessage());
     }
-
 }

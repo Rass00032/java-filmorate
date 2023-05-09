@@ -3,7 +3,6 @@ package ru.yandex.practicum.filmorate.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
@@ -28,7 +27,6 @@ public class UserController {
         service = userService;
     }
 
-
     @PostMapping
     public User register(@RequestBody @Valid User user) {
         return storage.register(user);
@@ -38,7 +36,6 @@ public class UserController {
     public User updateUser(@RequestBody @Valid User user) {
         return storage.updateUser(user);
     }
-
 
     @GetMapping
     public List<User> getAllUsers() {
@@ -50,16 +47,13 @@ public class UserController {
         return storage.getUser(id);
     }
 
-
     @PutMapping(value = "/{id}/friends/{friendId}")
     public List<User> addFriend(@PathVariable(value = "id") int id, @PathVariable(value = "friendId") int friendId) {
-
         return service.addFriend(id, friendId);
     }
 
     @DeleteMapping(value = "/{id}/friends/{friendId}")
     public List<User> removeFriend(@PathVariable(value = "id") int id, @PathVariable(value = "friendId") int friendID) {
-
         return service.removeFriend(id, friendID);
     }
 
@@ -72,5 +66,4 @@ public class UserController {
     public List<User> findCommonFriends(@PathVariable(value = "id") int id, @PathVariable(value = "otherId") int otherId) {
         return service.mutualFriends(id, otherId);
     }
-
 }
