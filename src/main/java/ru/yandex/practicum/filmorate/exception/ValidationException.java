@@ -1,8 +1,8 @@
-package ru.yandex.practicum.filmorate.controller;
+package ru.yandex.practicum.filmorate.exception;
 
 import java.io.IOException;
 
-public class ValidationException extends IOException {
+public class ValidationException extends RuntimeException {
     public ValidationException(final String message) {
         super(message);
     }
