@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public User getUser(@PathVariable(value = "id") int id){
+    public User getUser(@PathVariable(value = "id") int id) {
         return storage.getUser(id);
     }
 
