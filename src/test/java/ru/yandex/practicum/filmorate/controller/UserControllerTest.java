@@ -40,7 +40,7 @@ class UserControllerTest {
 
         storage = new InMemoryUserStorage();
         service = new UserService(storage);
-        controller = new UserController(storage, service);
+        controller = new UserController(service);
         user = new User(1, "java@yandex.ru", "login", "", LocalDate.of(1995, 8, 16));
     }
 

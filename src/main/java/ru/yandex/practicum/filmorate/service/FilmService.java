@@ -1,10 +1,11 @@
 package ru.yandex.practicum.filmorate.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.storage.FilmStorage;
 import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
 import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,17 +13,32 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class FilmService {
-    private InMemoryFilmStorage storage;
-    private InMemoryUserStorage userStorage;
+public class FilmService<T extends FilmStorage, T2 extends UserStorage> {
+
+    private T storage;
+    private T2 userStorage;
 
 
-    @Autowired
-    public FilmService(InMemoryFilmStorage inMemoryFilmStorage, InMemoryUserStorage inMemoryUserStorage) {
+    public FilmService(T inMemoryFilmStorage, T2 inMemoryUserStorage) {
         storage = inMemoryFilmStorage;
         userStorage = inMemoryUserStorage;
     }
 
+    public Film addFilm(Film film) {
+        return storage.addFilm(film);
+    }
+
+    public Film updateFilm(Film film) {
+        return storage.updateFilm(film);
+    }
+
+    public Film getFilm(int id) {
+        return storage.getFilm(id);
+    }
+
+    public List<Film> getAllFilms() {
+        return storage.getAllFilms();
+    }
 
     public int addLike(int filmId, int userId) {
         userStorage.getUser(userId);

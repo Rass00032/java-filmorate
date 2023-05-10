@@ -1,22 +1,37 @@
 package ru.yandex.practicum.filmorate.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exception.ObjectNotFound;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserService {
-    private InMemoryUserStorage storage;
+public class UserService<T extends UserStorage> {
+    private T storage;
 
-    @Autowired
-    public UserService(InMemoryUserStorage inMemoryUserStorage) {
+    public UserService(T inMemoryUserStorage) {
         storage = inMemoryUserStorage;
+    }
+
+    public User register(User user) {
+        return storage.register(user);
+    }
+
+    public User updateUser(User user) {
+        return storage.updateUser(user);
+    }
+
+    public List<User> getAllUsers() {
+        return storage.getAllUsers();
+    }
+
+    public User getUser(int id) {
+        return storage.getUser(id);
     }
 
     public List<User> addFriend(int userId, int friendsId) {
@@ -46,26 +61,25 @@ public class UserService {
     }
 
     public List<User> getAllFriends(int id) {
-        Object[] friends = storage.getUser(id).getFriends().toArray();
         List<User> users = new ArrayList<>();
-        for (Object friendsId : friends) {
-            users.add(storage.getUser((int) friendsId));
+
+        for (Integer idFriends : storage.getUser(id).getFriends()) {
+            users.add(storage.getUser(idFriends));
         }
         return users;
     }
 
     public List<User> mutualFriends(int userId, int anotherUserId) {
-        List<User> friendsUser = getAllFriends(userId);
-        Set<Integer> friendsAnotherUser = storage.getUser(anotherUserId).getFriends();
+        Set<Integer> friends = storage.getUser(userId).getFriends();
+        friends.retainAll(storage.getUser(anotherUserId).getFriends());
         List<User> mutualFriends = new ArrayList<>();
 
-        if (friendsUser.size() == 0) return mutualFriends;
+        if (friends.size() == 0) return mutualFriends;
 
-        for (User user : friendsUser) {
-            if (friendsAnotherUser.contains(user.getId())) {
-                mutualFriends.add(user);
-            }
+        for (Integer id : friends) {
+            mutualFriends.add(storage.getUser(id));
         }
+
         return mutualFriends;
     }
 }
