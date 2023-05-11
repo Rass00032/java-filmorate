@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class FilmService<T extends FilmStorage, T2 extends UserStorage> {
+public class FilmService {
 
-    private T storage;
-    private T2 userStorage;
+    private FilmStorage storage;
+    private UserStorage userStorage;
 
 
-    public FilmService(T inMemoryFilmStorage, T2 inMemoryUserStorage) {
+    public FilmService(FilmStorage inMemoryFilmStorage, UserStorage inMemoryUserStorage) {
         storage = inMemoryFilmStorage;
         userStorage = inMemoryUserStorage;
     }
