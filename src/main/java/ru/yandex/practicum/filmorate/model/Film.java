@@ -2,12 +2,11 @@ package ru.yandex.practicum.filmorate.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.*;
-import java.time.DateTimeException;
-import java.time.Duration;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +24,6 @@ public class Film {
 
     private Long duration;
 
+    private final Set<Integer> like = new HashSet<>();
 
 }

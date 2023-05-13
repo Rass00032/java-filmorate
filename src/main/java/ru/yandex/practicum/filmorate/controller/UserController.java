@@ -3,51 +3,61 @@ package ru.yandex.practicum.filmorate.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.service.UserService;
 
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private Map<Integer, User> users = new HashMap<>();
+    private final UserService service;
 
-    private int id = 1;
+    UserController(UserService userService) {
+        service = userService;
+    }
 
     @PostMapping
     public User register(@RequestBody @Valid User user) {
-        user.setId(id++);
-        if (user.getName() == null || user.getName().isBlank()) user.setName(user.getLogin());    // если имя пустое используется логин
-        users.put(user.getId(), user);
-        log.info("Регистрация полльзователя {}",user.getId());
-        return user;
+        return service.register(user);
     }
 
     @PutMapping
-    public User updateUser(@RequestBody @Valid User user) throws ValidationException {
-        if (!users.containsKey(user.getId())) {
-            log.error("Пользователь с таким {} не найден!",user.getId());
-            throw new ValidationException("Пользователь с таким id не найден!");
-        }
-
-        if (user.getName() == null || user.getName().isBlank()) user.setName(user.getLogin());    // если имя пустое используется логин
-        users.put(user.getId(), user);
-
-        log.info("Учётная запись {} обновлена", user.getId());
-        return user;
+    public User updateUser(@RequestBody @Valid User user) {
+        return service.updateUser(user);
     }
 
     @GetMapping
     public List<User> getAllUsers() {
-        log.info("Получение списка всех пользователей");
-        return new ArrayList<User>( users.values());
+        return service.getAllUsers();
     }
 
+    @GetMapping(value = "/{id}")
+    public User getUser(@PathVariable(value = "id") int id) {
+        return service.getUser(id);
+    }
 
+    @PutMapping(value = "/{id}/friends/{friendId}")
+    public List<User> addFriend(@PathVariable(value = "id") int id, @PathVariable(value = "friendId") int friendId) {
+        return service.addFriend(id, friendId);
+    }
+
+    @DeleteMapping(value = "/{id}/friends/{friendId}")
+    public List<User> removeFriend(@PathVariable(value = "id") int id, @PathVariable(value = "friendId") int friendID) {
+        return service.removeFriend(id, friendID);
+    }
+
+    @GetMapping(value = "/{id}/friends")
+    public List<User> getAllFriends(@PathVariable(value = "id") int id) {
+        return service.getAllFriends(id);
+    }
+
+    @GetMapping(value = "/{id}/friends/common/{otherId}")
+    public List<User> findCommonFriends(@PathVariable(value = "id") int id, @PathVariable(value = "otherId") int otherId) {
+        return service.mutualFriends(id, otherId);
+    }
 }
