@@ -39,14 +39,14 @@ public class FilmService {
         return storage.getAllFilms();
     }
 
-    public int addLike(int filmId, int userId){
+    public int addLike(int filmId, int userId) {
         userStorage.getUser(userId);
         storage.getFilm(filmId).getLike().add(userId);
 
         return storage.getFilm(filmId).getLike().size();
     }
 
-    public int removeLike(int filmId, int userId){
+    public int removeLike(int filmId, int userId) {
         userStorage.getUser(userId);
         storage.getFilm(filmId).getLike().remove(userId);
 
