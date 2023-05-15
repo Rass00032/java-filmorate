@@ -17,11 +17,11 @@ import java.util.List;
 public class FilmController {
 
     private final FilmService service;
-@Autowired
+
+    @Autowired
     public FilmController(FilmService service) {
         this.service = service;
     }
-
 
     @PostMapping
     public Film addFilm(@RequestBody @Valid Film film) {
