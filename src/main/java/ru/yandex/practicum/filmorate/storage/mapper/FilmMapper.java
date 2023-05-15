@@ -7,8 +7,6 @@ import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.model.MPA;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @NoArgsConstructor
 public class FilmMapper {
