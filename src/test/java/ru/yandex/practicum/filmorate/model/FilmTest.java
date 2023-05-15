@@ -7,9 +7,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Random;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,6 +37,7 @@ class FilmTest {
     @Test
     void setDescription() {
         final StringBuffer outputBuffer = new StringBuffer(201);
+
         for (int i = 0; i < 201; i++){
             outputBuffer.append("n");
         }

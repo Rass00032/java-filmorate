@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
 
     private Validator validator;
+
     private User user;
 
     @BeforeEach
