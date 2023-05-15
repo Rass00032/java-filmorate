@@ -38,7 +38,7 @@ class FilmTest {
     void setDescription() {
         final StringBuffer outputBuffer = new StringBuffer(201);
 
-        for (int i = 0; i < 201; i++){
+        for (int i = 0; i < 201; i++) {
             outputBuffer.append("n");
         }
         String description = outputBuffer.toString();
