@@ -8,7 +8,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import java.util.List;
 
 @Repository
-public class UserDbStorage implements UserStorage{
+public class UserDbStorage implements UserStorage {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -16,6 +16,7 @@ public class UserDbStorage implements UserStorage{
     public UserDbStorage(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
     @Override
     public User register(User user) {
         return null;
