@@ -1,34 +1,33 @@
 package ru.yandex.practicum.filmorate.controller;
 
 
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.service.FilmService;
-import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
-import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
-
+import ru.yandex.practicum.filmorate.model.MPA;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootApplication
+@SpringBootTest
+@AutoConfigureTestDatabase
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class FilmControllerTest {
-    private FilmController controller;
-    private InMemoryFilmStorage storage;
-    private InMemoryUserStorage userStorage;
-    private FilmService service;
+
+    private final FilmController controller;
     private Film film;
+
+
 
     @BeforeEach
     public void setUp() {
-        storage = new InMemoryFilmStorage();
-        service = new FilmService(storage, userStorage);
-        controller = new FilmController(service);
-        film = new Film(1, "name", "description", LocalDate.of(2000, 10, 11), 120L);
+        film = new Film(1, "name", "description", LocalDate.of(2000, 10, 11), 120L, new MPA(1,"G"));
     }
 
     @Test
@@ -44,7 +43,7 @@ class FilmControllerTest {
     @Test
     void updateFilm() throws ValidationException {
         controller.addFilm(film);
-        Film film2 = new Film(film.getId(), "name", "description", LocalDate.of(2000, 10, 11), 0L);
+        Film film2 = new Film(film.getId(), "name", "description", LocalDate.of(2000, 10, 11), 0L,new MPA(1,"G"));
 
         Exception exception = assertThrows(Exception.class, () -> {
             controller.updateFilm(film2);

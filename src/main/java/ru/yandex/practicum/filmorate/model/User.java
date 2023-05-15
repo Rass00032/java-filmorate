@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.model;
 
+import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
