@@ -126,29 +126,17 @@ public class FilmDbStorage implements FilmStorage {
                                         .toLocalDate(),
 
                                 rs.getLong(5),
-                                null
-
-                        );
+                                null);
                         return film;
                     }
-                }
-                , id);
+                }, id);
 
         MPA mpa = (MPA) jdbcTemplate.queryForRowSet("SELECT * FROM mpa WHERE id = ?", new RowMapper<MPA>() {
-                    @Override
-                    public MPA mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        return new MPA(rs.getInt(1),rs.getString(2));
-                    }
-                }
-
-
-                , mpaId[0]);
-
-
-
-
-
-
+            @Override
+            public MPA mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new MPA(rs.getInt(1), rs.getString(2));
+            }
+        }, mpaId[0]);
         return film;
     }
 
