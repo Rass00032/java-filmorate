@@ -2,7 +2,6 @@ package ru.yandex.practicum.filmorate.service;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import ru.yandex.practicum.filmorate.exception.ObjectNotFound;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
@@ -37,39 +36,17 @@ public class UserService {
     }
 
     public List<User> addFriend(int userId, int friendsId) {
-        if (!storage.contains(userId))
-            throw new ObjectNotFound("Пользователь с id = " + userId + " не найден.");
-
-        if (!storage.contains(friendsId))
-            throw new ObjectNotFound("Пользователь с id = " + friendsId + " не найден.");
-
-        storage.getUser(userId).getFriends().add(friendsId);
-        storage.getUser(friendsId).getFriends().add(userId);
-
-        return getAllFriends(userId);
+        return storage.addFriend(userId, friendsId);
     }
 
     public List<User> removeFriend(int userId, int friendsId) {
-        if (!storage.contains(userId))
-            throw new ObjectNotFound("Пользователь с id = " + userId + " не найден.");
-
-        if (!storage.contains(friendsId))
-            throw new ObjectNotFound("Пользователь с id = " + friendsId + " не найден.");
-
-        storage.getUser(userId).getFriends().remove(friendsId);
-        storage.getUser(friendsId).getFriends().remove(userId);
-
-        return getAllFriends(userId);
+        return storage.removeFriend(userId, friendsId);
     }
 
-    public List<User> getAllFriends(int id) {
-        List<User> users = new ArrayList<>();
-
-        for (Integer idFriends : storage.getUser(id).getFriends()) {
-            users.add(storage.getUser(idFriends));
-        }
-        return users;
+    public List<User> getAllFriends(int userId) {
+        return storage.getAllFriends(userId);
     }
+
 
     public List<User> mutualFriends(int userId, int anotherUserId) {
         Set<Integer> friends = new HashSet<>(storage.getUser(userId).getFriends());

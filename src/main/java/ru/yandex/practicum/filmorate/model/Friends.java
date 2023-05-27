@@ -7,7 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class Friends {
     private Integer id;
-    private Integer userId;     // userId запрашивает дружбу у friendId => userId в списке друзей friendId
+    private Integer userId;
     private Integer friendId;
-    private boolean accepted;   // friendId принял приглашение ?
 }

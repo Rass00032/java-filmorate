@@ -1,31 +1,27 @@
 package ru.yandex.practicum.filmorate.storage.mapper;
 
 import lombok.NoArgsConstructor;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.jdbc.core.RowMapper;
 import ru.yandex.practicum.filmorate.model.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @NoArgsConstructor
 public class UserMapper {
-    public static List<User> extractorUser(SqlRowSet rs) {
-        Map<Integer, User> usersById = new HashMap<>();
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            User user = usersById.get(id);
-            if (user == null) {
-                user = buildUser(rs, id);
-                usersById.put(user.getId(), user);
-            }
-        }
-        return new ArrayList<>(usersById.values());
-    }
 
-    private static User buildUser(SqlRowSet rs, int id) {
-        return new User(id, rs.getString("email"), rs.getString("login"),
-                rs.getString("name"), rs.getDate("birthday").toLocalDate());
+    public static RowMapper<User> rowMapperUser() {
+
+        return new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getDate(5).toLocalDate()
+                );
+            }
+        };
     }
 }

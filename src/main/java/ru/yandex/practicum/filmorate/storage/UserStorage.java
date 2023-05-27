@@ -13,5 +13,11 @@ public interface UserStorage {
 
     User getUser(int id);
 
-    boolean contains(int id);
+    List<User> addFriend(int userId, int friendsId);
+
+    List<User> removeFriend(int userId, int friendsId);
+
+    List<User> getAllFriends(int userId);
+
+    void contains(int id);
 }

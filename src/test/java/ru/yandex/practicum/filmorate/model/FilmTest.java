@@ -23,7 +23,7 @@ class FilmTest {
         factory.getConstraintValidatorFactory();
         validator = factory.getValidator();
         film = new Film(1,"name","description",LocalDate.of(2000,10,11),
-                120L,new MPA(1,"PG"));
+                120,new MPA(1,"PG"), 1);
     }
 
     @Test

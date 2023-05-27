@@ -1,23 +1,24 @@
 package ru.yandex.practicum.filmorate.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import java.util.List;
 
 @Service
 public class FilmService {
+    @Qualifier("filmDbStorage")
+    private final FilmStorage storage;
 
-    private FilmStorage storage;
-    private UserStorage userStorage;
+    @Qualifier("userDbStorage")
+    private final UserStorage userStorage;
 
-@Autowired
+    @Autowired
     public FilmService(FilmStorage inMemoryFilmStorage, UserStorage inMemoryUserStorage) {
         storage = inMemoryFilmStorage;
         userStorage = inMemoryUserStorage;
@@ -40,24 +41,18 @@ public class FilmService {
     }
 
     public int addLike(int filmId, int userId) {
-        userStorage.getUser(userId);
-        storage.getFilm(filmId).getLike().add(userId);
-
-        return storage.getFilm(filmId).getLike().size();
+        storage.contains(filmId);
+        userStorage.contains(userId);
+        return storage.addLike(filmId,userId);
     }
 
     public int removeLike(int filmId, int userId) {
-        userStorage.getUser(userId);
-        storage.getFilm(filmId).getLike().remove(userId);
-
-        return storage.getFilm(filmId).getLike().size();
+        storage.contains(filmId);
+        userStorage.contains(userId);
+        return storage.removeLike(filmId,userId);
     }
 
     public List<Film> findPopularFilms(int count) {
-        Comparator<Film> byLikes = Comparator.comparingInt(o -> o.getLike().size());
-        return storage.getAllFilms().stream()
-                .sorted(byLikes.reversed())
-                .limit(count)
-                .collect(Collectors.toList());
+        return storage.findPopularFilms(count);
     }
 }

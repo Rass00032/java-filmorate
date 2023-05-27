@@ -1,26 +1,21 @@
 package ru.yandex.practicum.filmorate.controller;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.Film;
+
 import ru.yandex.practicum.filmorate.service.FilmService;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Slf4j
-@Repository
 @RestController
 @RequestMapping("/films")
 public class FilmController {
 
     private final FilmService service;
 
-    @Autowired
-    public FilmController(FilmService service) {
-        this.service = service;
+    public FilmController(FilmService filmService) {
+        service = filmService;
     }
 
     @PostMapping
@@ -54,7 +49,8 @@ public class FilmController {
     }
 
     @GetMapping(value = "/popular")
-    public List<Film> popularFilm(@RequestParam(defaultValue = "10", required = false) String count) {
+    public List<Film> popularFilm(@RequestParam(defaultValue = "10") String count) {
         return service.findPopularFilms(Integer.parseInt(count));
     }
 }
+

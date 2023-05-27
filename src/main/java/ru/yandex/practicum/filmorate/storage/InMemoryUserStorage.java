@@ -67,9 +67,43 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public boolean contains(int id) {
+    public List<User> addFriend(int userId, int friendsId) {
+        contains(userId);
+        contains(friendsId);
+
+        getUser(userId).getFriends().add(friendsId);
+        getUser(friendsId).getFriends().add(userId);
+
+        return getAllFriends(userId);
+    }
+
+    @Override
+    public List<User> removeFriend(int userId, int friendsId) {
+        contains(userId);
+        contains(friendsId);
+
+        getUser(userId).getFriends().remove(friendsId);
+        getUser(friendsId).getFriends().remove(userId);
+
+        return getAllFriends(userId);
+    }
+
+    @Override
+    public List<User> getAllFriends(int id) {
+        List<User> users = new ArrayList<>();
+
+        for (Integer idFriends : getUser(id).getFriends()) {
+            users.add(getUser(idFriends));
+        }
+        return users;
+    }
+
+    @Override
+    public void contains(int id) {
         boolean is = users.containsKey(id);
-        if (!is) log.error("Пользователь с таким {} не найден!", id);
-        return is;
+        if (!is) {
+            log.error("Пользователь с таким {} не найден!", id);
+            throw new ObjectNotFound("Пользователь с таким id не найден!");
+        }
     }
 }

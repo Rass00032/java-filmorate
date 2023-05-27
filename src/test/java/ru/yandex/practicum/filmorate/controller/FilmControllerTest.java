@@ -27,7 +27,7 @@ class FilmControllerTest {
 
     @BeforeEach
     public void setUp() {
-        film = new Film(1, "name", "description", LocalDate.of(2000, 10, 11), 120L, new MPA(1,"G"));
+        film = new Film(1, "name", "description", LocalDate.of(2000, 10, 11), 120, new MPA(1,"G"), 4);
     }
 
     @Test
@@ -43,7 +43,7 @@ class FilmControllerTest {
     @Test
     void updateFilm() throws ValidationException {
         controller.addFilm(film);
-        Film film2 = new Film(film.getId(), "name", "description", LocalDate.of(2000, 10, 11), 0L,new MPA(1,"G"));
+        Film film2 = new Film(film.getId(), "name", "description", LocalDate.of(2000, 10, 11), 0,new MPA(1,"G"), 1);
 
         Exception exception = assertThrows(Exception.class, () -> {
             controller.updateFilm(film2);

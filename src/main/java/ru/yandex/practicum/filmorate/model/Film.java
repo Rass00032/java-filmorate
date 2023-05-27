@@ -23,10 +23,12 @@ public class Film {
 
     private LocalDate releaseDate;
 
-    private Long duration;
+    private Integer duration;
 
     @NotNull
     private MPA mpa;
+
+    private Integer rate = 0;
 
     private final Set<Integer> like = new HashSet<>();
 

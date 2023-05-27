@@ -9,8 +9,6 @@ import ru.yandex.practicum.filmorate.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
 
-
-@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
