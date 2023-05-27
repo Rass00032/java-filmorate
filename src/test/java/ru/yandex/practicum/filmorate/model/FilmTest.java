@@ -22,8 +22,8 @@ class FilmTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         factory.getConstraintValidatorFactory();
         validator = factory.getValidator();
-        film = new Film(1,"name","description",LocalDate.of(2000,10,11),
-                120,new MPA(1,"PG"), 1);
+        film = new Film(1, "name", "description", LocalDate.of(2000, 10, 11),
+                120, new MPA(1, "PG"), 1);
     }
 
     @Test

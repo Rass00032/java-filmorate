@@ -24,7 +24,7 @@ class UserTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         factory.getConstraintValidatorFactory();
         validator = factory.getValidator();
-        user = new User(0,"java@yandex.ru","login","name", LocalDate.of(1995,8,16));
+        user = new User(0, "java@yandex.ru", "login", "name", LocalDate.of(1995, 8, 16));
     }
 
     @Test
@@ -50,7 +50,7 @@ class UserTest {
 
     @Test
     void setBirthday() {
-        LocalDate date = LocalDate.of(2030,10,10);
+        LocalDate date = LocalDate.of(2030, 10, 10);
         user.setBirthday(date);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertFalse(violations.isEmpty());

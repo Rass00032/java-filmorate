@@ -24,7 +24,7 @@ public class TestUserDbStorage {
 
     @BeforeEach
     public void setUp() {
-        user1 = new User(1,"email.@mail.ru", "login1", "name1" ,LocalDate.of(2000, 10, 11));
+        user1 = new User(1, "email.@mail.ru", "login1", "name1", LocalDate.of(2000, 10, 11));
     }
 
     @Test
@@ -36,12 +36,12 @@ public class TestUserDbStorage {
 
     @Test
     public void testAddAll() {
-      User user2 = new User(2,"email2.@mail.ru", "login2", "name2" ,LocalDate.of(2002, 12, 11));
-      User user3 = new User(3,"email3.@mail.ru", "login3", "name3" ,LocalDate.of(2003, 10, 11));
+        User user2 = new User(2, "email2.@mail.ru", "login2", "name2", LocalDate.of(2002, 12, 11));
+        User user3 = new User(3, "email3.@mail.ru", "login3", "name3", LocalDate.of(2003, 10, 11));
 
-      storage.register(user1);
-      storage.register(user2);
-      storage.register(user3);
+        storage.register(user1);
+        storage.register(user2);
+        storage.register(user3);
 
         List<User> users = new ArrayList<>();
         users.add(user1);
