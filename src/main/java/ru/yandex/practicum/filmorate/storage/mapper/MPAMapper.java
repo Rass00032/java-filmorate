@@ -9,11 +9,11 @@ import java.sql.SQLException;
 
 @NoArgsConstructor
 public class MPAMapper {
-    public static RowMapper<MPA> rowMapperMPA(){
+    public static RowMapper<MPA> rowMapperMPA() {
         return new RowMapper<MPA>() {
             @Override
             public MPA mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new MPA(rs.getInt(1),rs.getString(2));
+                return new MPA(rs.getInt(1), rs.getString(2));
             }
         };
     }
