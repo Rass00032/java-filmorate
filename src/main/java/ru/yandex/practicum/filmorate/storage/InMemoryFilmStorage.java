@@ -100,6 +100,8 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public void contains(int id) {
-         if(!films.containsKey(id)) throw new ObjectNotFound("Фильм с id = " + id + " не найден.");
+        if (!films.containsKey(id)) {
+            throw new ObjectNotFound("Фильм с id = " + id + " не найден.");
+        }
     }
 }

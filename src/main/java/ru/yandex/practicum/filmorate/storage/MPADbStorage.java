@@ -32,7 +32,9 @@ public class MPADbStorage implements MPAStorage {
     @Override
     public MPA getMPA(int id) {
         int exists = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM mpa WHERE id = ?", Integer.class, id);
-        if(exists == 0) throw new ObjectNotFound("Объект " +id +" не найден");
+        if (exists == 0) {
+            throw new ObjectNotFound("Объект " + id + " не найден");
+        }
         return jdbcTemplate.queryForObject("SELECT * FROM mpa WHERE id = ?", rowMapperMPA(), id);
     }
 }
