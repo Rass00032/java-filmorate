@@ -39,7 +39,6 @@ public class TestUserDbStorage {
         User user2 = new User(2, "email2.@mail.ru", "login2", "name2", LocalDate.of(2002, 12, 11));
         User user3 = new User(3, "email3.@mail.ru", "login3", "name3", LocalDate.of(2003, 10, 11));
 
-        storage.register(user1);
         storage.register(user2);
         storage.register(user3);
 

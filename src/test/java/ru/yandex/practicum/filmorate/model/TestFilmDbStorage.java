@@ -19,9 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureTestDatabase
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class TestFilmDbStorage {
-    @Autowired
-    private FilmDbStorage filmDbStorage;
+
+    private final FilmDbStorage filmDbStorage;
+
     private Film film;
+
 
     @BeforeEach
     public void setUp() {
@@ -39,7 +41,7 @@ public class TestFilmDbStorage {
     public void testAddAll() {
         Film film2 = new Film(2, "name2", "description", LocalDate.of(2000, 10, 11), 120, new MPA(1, "G"), 1);
         Film film3 = new Film(3, "name3", "description", LocalDate.of(2000, 10, 11), 120, new MPA(1, "G"), 2);
-        filmDbStorage.addFilm(film);
+
         filmDbStorage.addFilm(film2);
         filmDbStorage.addFilm(film3);
 
@@ -47,6 +49,8 @@ public class TestFilmDbStorage {
         filmList.add(film);
         filmList.add(film2);
         filmList.add(film3);
+
+        List<Film> g = filmDbStorage.getAllFilms();
 
         assertEquals(filmList, filmDbStorage.getAllFilms());
     }
