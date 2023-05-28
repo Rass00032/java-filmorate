@@ -20,3 +20,12 @@ FROM films AS f
 INNER JOIN likes AS l ON f.film_id = l.film_id
 WHERE f.film_id = 1
 ```
+Получение списка жанров для конкретного фильма:
+ ```SQL
+SELECT g.id, g.name
+FROM films AS f
+JOIN films_genres AS fg ON fg.film_id = f.id
+JOIN genres AS g ON fg.genre_id = g.id
+WHERE f.id = ?
+ORDER BY g.id
+```
