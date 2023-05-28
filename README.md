@@ -13,3 +13,10 @@ SELECT friend_id
 FROM users 
 WHERE user_id = 1
 ```
+Получение списка пользователей, которым понравился фильм:
+ ```SQL
+SELECT user_id
+FROM films AS f
+INNER JOIN likes AS l ON f.film_id = l.film_id
+WHERE f.film_id = 1
+```
