@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
@@ -22,8 +23,15 @@ public class Film {
 
     private LocalDate releaseDate;
 
-    private Long duration;
+    private Integer duration;
+
+    @NotNull
+    private MPA mpa;
+
+    private Integer rate = 0;
 
     private final Set<Integer> like = new HashSet<>();
+
+    private final Set<Genre> genres = new LinkedHashSet<>();
 
 }

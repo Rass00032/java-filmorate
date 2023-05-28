@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class User {
 
-    private final Integer id;
+    private Integer id;
 
     @Email
     private String email;
