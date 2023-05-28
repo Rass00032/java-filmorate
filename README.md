@@ -7,18 +7,18 @@ Template repository for Filmorate project.
 
 Примеры SQL-запросов к базе данных:
 
- Получение списка друзей пользователя по '*userId из запроса*':
+ Получение списка друзей пользователя:
  ```SQL
 SELECT friend_id
 FROM users 
-WHERE user_id = 1
+WHERE user_id = ?
 ```
 Получение списка пользователей, которым понравился фильм:
  ```SQL
 SELECT user_id
 FROM films AS f
 INNER JOIN likes AS l ON f.film_id = l.film_id
-WHERE f.film_id = 1
+WHERE f.film_id = ?
 ```
 Получение списка жанров для конкретного фильма:
  ```SQL
