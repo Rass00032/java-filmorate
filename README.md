@@ -9,15 +9,7 @@ Template repository for Filmorate project.
 
  Получение списка друзей пользователя по '*userId из запроса*':
  ```SQL
-SELECT *
+SELECT friend_id
 FROM users 
-WHERE user_id IN (SELECT friend_id 
-                  FROM friendship 
-                  WHERE user_id = <userId from request> AND
-                        confirmed = true
-                  UNION
-                  SELECT user_id
-                  FROM friendship
-                  WHERE friend_id = <userId from request> AND
-                        confirmed = true);
+WHERE user_id = 1
 ```
